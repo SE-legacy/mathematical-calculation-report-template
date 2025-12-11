@@ -73,10 +73,9 @@
 #let space = [ ].func()
 #let sequence = [].func()
 
-#let code_font_size = font_size - 2pt
+#let code_font_size = font_size - 4pt
 // TODO: надо выяснить сколько нужно приплюсовывать к -indent без хардкода
 #let code_block_move = -indent + 11pt
-
 #let code-block-raw(code) = {
   set text(size: code_font_size)
   // TODO: нужно выяснить почему нужно переоборачивать raw, чтобы размер был
@@ -340,9 +339,6 @@
   document: (
     apply_heading_styles: it => {
       set text(size: font_size)
-      if it.depth == 1 {
-        pagebreak(weak: true)
-      }
       if strings.caps_headings.contains(it.body) {
         align(center, it.body)
       } else {
@@ -531,9 +527,6 @@
   set align(center)
 
   show heading: it => {
-    if it.depth == 1 {
-      pagebreak(weak: true)
-    }
     set text(size: font_size)
     let letter = counter(heading).display(annex-numbering)
     [ПРИЛОЖЕНИЕ #letter \ #it.body #v(line_spacing / 2)]
